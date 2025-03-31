@@ -4,5 +4,8 @@ set -x
 CURR_DIR=`pwd`
 SCRIPT_DIR=$(dirname "$0")
 cd $SCRIPT_DIR
-julia ../run_program.jl --phenotype --config "$1"
+#julia -e 'import Pkg; Pkg.add("ArgParse")'
+julia --project=.. -e 'using Pkg; Pkg.instantiate(); using Conda; Conda.add("bed-reader")'
+julia --project=.. ../run_program.jl --phenotype --config "$1"
 cd $CURR_DIR
+
